@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: '@activatedProperties@'
+  application:
+    name: openapi-service
+  cloud:
+    alicloud:
+      ans:
+        server-list: 127.0.0.1
+        server-port: 8080
+
+pagehelper:
+  helper-dialect: mysql
+  page-size-zero: true

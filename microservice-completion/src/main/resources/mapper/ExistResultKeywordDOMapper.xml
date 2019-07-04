@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.melink.sop.completion.dao.ExistResultKeywordDOMapper" >
+  <resultMap id="BaseResultMap" type="com.melink.sop.completion.model.ExistResultKeywordDO" >
+    <id column="guid" property="guid" jdbcType="VARCHAR" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from exist_result_keyword
+    where guid = #{guid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.melink.sop.completion.model.ExistResultKeywordDO" >
+    insert into exist_result_keyword (guid, text, create_time, 
+      weight)
+    values (#{guid,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{weight,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.melink.sop.completion.model.ExistResultKeywordDO" >
+    update exist_result_keyword
+    set text = #{text,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      weight = #{weight,jdbcType=INTEGER}
+    where guid = #{guid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select guid, text, create_time, weight
+    from exist_result_keyword
+    where guid = #{guid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select guid, text, create_time, weight
+    from exist_result_keyword
+  </select>
+</mapper>

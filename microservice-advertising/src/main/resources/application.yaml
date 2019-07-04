@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: advert-service
+  cloud:
+    alicloud:
+      ans:
+        server-list: 127.0.0.1
+        server-port: 8080
+  datasource:
+    url: jdbc:mysql://rm-bp15gczz2b6835281.mysql.rds.aliyuncs.com:3306/net_pic?useUnicode=true&amp;characterEncoding=utf8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: bqss
+    password: 665Fbt7Nxkcj
+server:
+  port: 10002
+
+
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-handlers-package: com.melink.advert.model
+
+

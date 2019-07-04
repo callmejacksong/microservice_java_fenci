@@ -23,9 +23,3 @@
 /dist/
 /nbdist/
 /.nb-gradle/
-logs
-advertising-api/target
-microservice-advertising/target
-
-microservice-dialog/target
-openapi-api/target

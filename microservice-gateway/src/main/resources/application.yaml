@@ -1,0 +1,47 @@
+ server:
+   port: 15012
+#   tomcat:
+#      basedir: /home/admin/
+#      accesslog:
+#      enabled: true
+#      pattern: '%{X-Forwarded-For}i %h %l %u %t "%r" %s %b %T'
+#      file-date-format: yyyy-MM-dd.HH
+#      prefix: localhost_access_log.
+#      suffix: .txt
+#      rotate: true
+#      request-attributes-enabled: false
+
+ spring:
+   application:
+     name: spring-gateway
+   cloud:
+     gateway: # config the routes for gateway
+       routes:
+       - id: lb_completion_service
+         uri: lb://completion-service
+         predicates:
+         - Path=/open/v2/dictionary/**
+         filters:
+         - StripPrefix=3
+       - id: lb_openapi_service
+         uri: lb://openapi-service
+         predicates:
+         - Path=/*/v2/**
+         filters:
+         - StripPrefix=2
+       - id: lb_advert_service
+         uri: lb://advert-service
+         predicates:
+         - Path=/advert/refresh
+         filters:
+         - StripPrefix=1
+       - id: lb_dialog_service
+         uri: lb://dialog-service
+         predicates:
+         - Path=/dialog/**
+         filters:
+         - StripPrefix=1
+     alicloud:
+       ans:
+         server-list: 127.0.0.1
+         server-port: 8080

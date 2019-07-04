@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: dialog-service
+  cloud:
+    alicloud:
+      ans:
+        server-list: 127.0.0.1
+        server-port: 8080
+  datasource:
+    url: jdbc:mysql://rm-bp15gczz2b6835281.mysql.rds.aliyuncs.com:3306/net_pic?useUnicode=true&amp;characterEncoding=utf8
+    #url: jdbc:mysql://rm-bp193jd033arhn169.mysql.rds.aliyuncs.com:3306/net_pic?useUnicode=true&amp;characterEncoding=utf8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: bqss
+    password: 665Fbt7Nxkcj
+  servlet:
+    multipart:
+      max-file-size: 5MB
+server:
+  port: 10003
+
+
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    use-generated-keys: true
+  type-handlers-package: com.melink.dialog.model
+
+ribbon:
+  ReadTimeout: 12000
+
+tuling:
+  config:
+    uri: http://www.tuling123.com/openapi/api
+    key: 4e2dc44095c5783c785e6dd4d8a4f4f9
+
+
+tengxun:
+  ocr:
+    appId: 1251246619
+    secretId: AKIDhBuyrIMl7vDYbpRmQnOoWzb0scolmnhS
+    secretKey: KwK8FzYeMU7OjnvqBFUSALAt7ZAkE7Jy
+  nlp:
+    appId: 2114972875
+    url: https://api.ai.qq.com/fcgi-bin/nlp/nlp_textpolar
+    appKey: sby1iCJeUBv851xl
+
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d [%t] %-5p [%c] - %m%n</Pattern>
+        </layout>
+    </appender>
+    <appender name="eventLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/home/admin/logs/event.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/home/admin/logs/event.log.%d{yyyy-MM-dd-HH}</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="com.melink.open.api.service.impl.EventCallbackServiceImpl" level="WARN" additivity="false">
+        <appender-ref ref="eventLog"/>
+    </logger>
+    <root level="INFO">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>

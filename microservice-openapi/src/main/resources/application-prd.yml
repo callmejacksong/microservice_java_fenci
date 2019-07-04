@@ -1,0 +1,46 @@
+server:
+  port: 10001
+  tomcat:
+    basedir: /home/admin/
+    accesslog:
+      enabled: true
+      pattern: '%{X-Forwarded-For}i %h %l %u %t "%r" %s %b %T'
+      file-date-format: yyyy-MM-dd.HH
+      prefix: localhost_access_log.
+      suffix: .txt
+      rotate: true
+      request-attributes-enabled: false
+
+syh:
+  jdbc:
+    net-pic:
+      jdbc-url: jdbc:mysql://rm-bp15gczz2b6835281.mysql.rds.aliyuncs.com:3306/net_pic?useUnicode=true&amp;characterEncoding=utf8
+      driver-class-name: com.mysql.jdbc.Driver
+      username: bqss
+      password: 665Fbt7Nxkcj
+    melink:
+      jdbc-url: jdbc:mysql://rm-bp1cv1qk98r07i1cs.mysql.rds.aliyuncs.com:3306/melink?useUnicode=true&amp;characterEncoding=utf8
+      driver-class-name: com.mysql.jdbc.Driver
+      username: bqss
+      password: Melink1212
+  redis:
+    config:
+      host: 'r-bp15e8a4520e2454.redis.rds.aliyuncs.com'
+      port: 6379
+      timeout: 500
+      password: 'Melink1212'
+  result:
+    redis:
+      config:
+        host: 'r-bp1919b447c5d664.redis.rds.aliyuncs.com'
+        port: 6379
+        timeout: 500
+        password: 'Melink1212'
+
+
+logging:
+    level:
+      com.melink.open.api.mapper: debug
+    config: classpath:logback-prd.xml
+
+test.isdebug: false
