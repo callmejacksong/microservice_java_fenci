@@ -1,5 +1,6 @@
 package com.melink.open.api.model;
 
+import com.alibaba.ans.shaded.com.alibaba.fastjson.annotation.JSONField;
 import com.melink.microservice.utils.GUIDGenerator;
 
 import java.io.Serializable;
@@ -20,6 +21,14 @@ public class NetKeyword implements Serializable {
 
     private Integer clevel;
 
+    @JSONField(name = "is_core")
+    private Integer isCore;
+
+    private Integer maintain;
+
+    private Integer kind;
+
+
     private List<NetPictureKeyword> netPictureKeywords;
 
     private List<NetKeywordRelation> netKeywordRelations;
@@ -35,6 +44,26 @@ public class NetKeyword implements Serializable {
     public void setGuid(String guid) {
         this.guid = guid;
     }
+    public void setIsCore(Integer isCore) {
+        this.isCore = isCore;
+    }
+    public void setKind(Integer kind) {
+        this.kind = kind;
+    }
+    public void setMaintain(Integer maintain) {
+        this.maintain = maintain;
+    }
+    public Integer getIsCore() {
+        return isCore;
+    }
+    public Integer getKind() {
+        return kind;
+    }
+    public Integer getMaintain() {
+        return maintain;
+    }
+
+
 
     public String getCategory() {
         return category;

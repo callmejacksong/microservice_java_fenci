@@ -16,4 +16,11 @@ public interface KeywordNetMapper {
     @Select("select k.*,d.* from keyword_net k left join net_picture_keyword n on k.guid = n.keyword_id " +
             "left join net_picture_keyword_dension d on d.np_id = n.np_id and  d.keyword_id = k.guid  where n.np_id = #{npid} and n.status_d2 = 1 and (d.dension != 10002 or d.dension is null)")
     List<NetKeyword> findEmoticonKeyword(@Param("npid") String npid);
+
+
+
+    @Select("select * from keyword_net_copy where text= #{keyword} limit 1")
+    NetKeyword findKeyword(@Param("keyword") String keyword);
+
+
 }

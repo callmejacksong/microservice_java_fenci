@@ -5,6 +5,7 @@ import com.melink.microservice.json.JsonSerializer;
 import com.melink.microservice.utils.ResultConverUtil;
 import com.melink.microservice.utils.Tools;
 import com.melink.open.api.annotation.NewRequiredAuth;
+import com.melink.open.api.mapper.netPicMapper.KeywordNetMapper;
 import com.melink.open.api.service.OpenEmoticionService;
 import com.melink.open.api.util.SensitiveWordUtil;
 import com.melink.open.api.vo.SearchVO;
@@ -56,6 +57,16 @@ public class OpenEmoticonController extends AbstractListController<OpenEmoticion
                                  @Valid final SearchVO vo, final BindingResult result) throws IOException {
 
         String resultStr = openEmoticionService.newSearchEmoji(appId, sslRes, partner, vo, result);
+        return resultStr;
+    }
+
+    @RequestMapping(value = "/gifs/search_keyword", produces = {"application/json;charset=UTF-8"})
+    public String netkeyword(//@RequestParam("timestamp") final String timestamp,
+//                                 @RequestParam("signature") final String signature,
+                                 @RequestParam("keyword") final String keyword,
+                                 HttpServletRequest request) throws IOException {
+
+        String resultStr = openEmoticionService.findKeyword(keyword);
         return resultStr;
     }
 

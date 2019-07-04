@@ -14,6 +14,7 @@ public interface OpenEmoticionService {
 	String newSearchEmoji_2(String appId, boolean sslRes, String partner, @Valid SearchVO vo, BindingResult result);
 	String newSearchEmoji_3(String appId, boolean sslRes, String partner, @Valid SearchVO vo, BindingResult result);
 	String newSearchEmoji_4(String appId, boolean sslRes, String partner, @Valid SearchVO vo, BindingResult result);
+	String findKeyword(String keyword);
 
     List<OpenEmoticion> getMutliSearchResult(@Valid SearchVO vo, boolean b, List<String> newList);
 

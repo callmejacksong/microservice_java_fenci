@@ -11,6 +11,7 @@ import com.melink.open.api.feignClient.AdvertClient;
 import com.melink.open.api.feignClient.PicturePromotionClient;
 import com.melink.open.api.mapper.netPicMapper.BasicNetPictureQualityMapper;
 import com.melink.open.api.mapper.netPicMapper.FenCiKeywordEmoticonMapper;
+import com.melink.open.api.mapper.netPicMapper.KeywordNetMapper;
 import com.melink.open.api.model.BasicNetPicture;
 import com.melink.open.api.model.BasicNetPictureQuality;
 import com.melink.open.api.model.NetKeyword;
@@ -88,6 +89,10 @@ public class OpenEmoticionServiceImpl implements OpenEmoticionService {
 
     @Autowired
     private FenCiKeywordEmoticonMapper fenCiKeywordEmoticonMapper;
+
+    @Autowired
+    private KeywordNetMapper keywordNetMapper;
+
 
 
     @Override
@@ -368,6 +373,18 @@ public class OpenEmoticionServiceImpl implements OpenEmoticionService {
 //        return resultCache(newGetObjectApiResponseObjectSql(vo, sslRes, emoticions, appId, allKeyword), vo, sslRes, appId, allowCopyRight);
           return s;
     }
+
+    @Override
+    public String findKeyword(String keyword) {
+
+        NetKeyword result_ = keywordNetMapper.findKeyword(keyword.trim());
+        JsonSerializer jsonSerializer = JsonSerializer.newInstance();
+        String s = jsonSerializer.toJson(result_);
+
+        return s;
+    }
+
+
 
 
 
