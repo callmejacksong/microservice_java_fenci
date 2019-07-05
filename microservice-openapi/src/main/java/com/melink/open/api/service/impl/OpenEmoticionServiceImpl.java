@@ -275,6 +275,7 @@ public class OpenEmoticionServiceImpl implements OpenEmoticionService {
         for (BasicNetPicture emo:u_emoticons){
             emo.setFenciWords(words);
             emo.setText(emo.getTextinfo());
+            emo.setIs_animated(emo.getDynamic());
             System.out.println(emo.getWeight());
         }
         System.out.println("main_3完成了");

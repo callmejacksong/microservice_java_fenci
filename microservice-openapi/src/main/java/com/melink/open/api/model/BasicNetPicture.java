@@ -23,6 +23,7 @@ public class BasicNetPicture implements Serializable {
     private Integer height;
 
     private Integer dynamic;
+    private Integer is_animated;
 
     private String name;
 
@@ -136,12 +137,18 @@ public class BasicNetPicture implements Serializable {
         this.height = height;
     }
 
+    public Integer getIs_animated() {
+        return is_animated;
+    }
     public Integer getDynamic() {
         return dynamic;
     }
 
     public void setDynamic(Integer dynamic) {
         this.dynamic = dynamic;
+    }
+    public void setIs_animated(Integer is_animated) {
+        this.is_animated = is_animated;
     }
 
     public String getName() {
