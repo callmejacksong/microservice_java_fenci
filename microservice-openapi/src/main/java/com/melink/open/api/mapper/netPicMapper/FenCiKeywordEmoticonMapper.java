@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface FenCiKeywordEmoticonMapper {
 
-    @Select("select c.*,d.textinfo,a.weight,concat(\"https://sdk-ssl.static.dongtu.com/\",e.thumb) as thumb from net_picture_keyword_copy as a left join  keyword_net_copy as b on a.keyword_id=b.guid left join `basic_net_picture` as c on a.np_id=c.guid left join basic_net_picture_textinfo as d on c.guid=d.guid left join basic_net_picture_quality as e on d.guid=e.`np_id`  where c.level>=10 and e.`quality`=2 and b.text=#{text};")
+    @Select("select c.guid,c.net_url,c.store_url,e.width,e.height,c.`dynamic`,c.`name`,c.wt,c.sfrom,c.`level`,c.kind,c.create_time,e.fsize,d.textinfo,a.weight,concat(\"https://sdk-ssl.static.dongtu.com/\",e.thumb) as thumb from net_picture_keyword_copy as a left join  keyword_net_copy as b on a.keyword_id=b.guid left join `basic_net_picture` as c on a.np_id=c.guid left join basic_net_picture_textinfo as d on c.guid=d.guid left join basic_net_picture_quality as e on d.guid=e.`np_id`  where c.level>=10 and e.`quality`=2 and b.text=#{text};")
     List<BasicNetPicture> findNetPictureByKeyword(@Param("text") String text);
 
 

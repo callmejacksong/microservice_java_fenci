@@ -242,23 +242,25 @@ public class OpenEmoticionServiceImpl implements OpenEmoticionService {
                 u_emoticons.add(emo);
             }
         }
-        List<BasicNetPicture> emos_muti = new ArrayList<BasicNetPicture>();
-        for (String te : words) {
-            List<BasicNetPicture> emos = getSearchResultByQuerySQL(te);
-            for (BasicNetPicture emo:emos){
-                if (set.add(emo)) {
-                    emo.setWeight(emo.getWeight()+2);
-                    u_emoticons.add(emo);
-                }else{
-                    emos_muti.add(emo);
-                }
+        if(words.size()>1) {
+            List<BasicNetPicture> emos_muti = new ArrayList<BasicNetPicture>();
+            for (String te : words) {
+                List<BasicNetPicture> emos = getSearchResultByQuerySQL(te);
+                for (BasicNetPicture emo : emos) {
+                    if (set.add(emo)) {
+                        emo.setWeight(emo.getWeight() + 2);
+                        u_emoticons.add(emo);
+                    } else {
+                        emos_muti.add(emo);
+                    }
 
+                }
             }
-        }
-        for (BasicNetPicture emo:u_emoticons){
-            for (BasicNetPicture emo_1:emos_muti){
-                if (emo.getGuid()==emo_1.getGuid()) {
-                    emo.setWeight(emo.getWeight()+1);
+            for (BasicNetPicture emo : u_emoticons) {
+                for (BasicNetPicture emo_1 : emos_muti) {
+                    if (emo.getGuid() == emo_1.getGuid()) {
+                        emo.setWeight(emo.getWeight() + 1);
+                    }
                 }
             }
         }
@@ -379,7 +381,18 @@ public class OpenEmoticionServiceImpl implements OpenEmoticionService {
     public String findKeyword(String keyword) {
 
         NetKeyword result_ = keywordNetMapper.findKeyword(keyword.trim());
+        if(result_ != null){
+            List<String> words=new ArrayList<>();
+            List<String> segments = WordUtils.segment(keyword);
+            if (segments.size() > 5) {
+                words.addAll(new ArrayList<String>(segments.subList(0, 5)));
+            } else {
+                words.addAll(segments);
+            }
+            result_.setFenci(words);
+        }
         JsonSerializer jsonSerializer = JsonSerializer.newInstance();
+
         String s = jsonSerializer.toJson(result_);
 
         return s;
@@ -410,23 +423,25 @@ public class OpenEmoticionServiceImpl implements OpenEmoticionService {
                 u_emoticons.add(emo);
             }
         }
-        List<OpenEmoticion> emos_muti = new ArrayList<OpenEmoticion>();
-        for (String te : words) {
-            List<OpenEmoticion> emos = getSearchResult_2(appId, vo,te,  allKeyword,allowCopyRight);
-            for (OpenEmoticion emo:emos){
-                if (set.add(emo)) {
-                    emo.setWeight(emo.getWeight()+2);
-                    u_emoticons.add(emo);
-                }else{
-                    emos_muti.add(emo);
-                }
+        if(words.size()>1) {
+            List<OpenEmoticion> emos_muti = new ArrayList<OpenEmoticion>();
+            for (String te : words) {
+                List<OpenEmoticion> emos = getSearchResult_2(appId, vo, te, allKeyword, allowCopyRight);
+                for (OpenEmoticion emo : emos) {
+                    if (set.add(emo)) {
+                        emo.setWeight(emo.getWeight() + 2);
+                        u_emoticons.add(emo);
+                    } else {
+                        emos_muti.add(emo);
+                    }
 
+                }
             }
-        }
-        for (OpenEmoticion emo:u_emoticons){
-            for (OpenEmoticion emo_1:emos_muti){
-                if (emo.getGuid()==emo_1.getGuid()) {
-                    emo.setWeight(emo.getWeight()+emo_1.getWeight());
+            for (OpenEmoticion emo : u_emoticons) {
+                for (OpenEmoticion emo_1 : emos_muti) {
+                    if (emo.getGuid() == emo_1.getGuid()) {
+                        emo.setWeight(emo.getWeight() + emo_1.getWeight());
+                    }
                 }
             }
         }

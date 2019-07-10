@@ -27,6 +27,7 @@ public class NetKeyword implements Serializable {
     private Integer maintain;
 
     private Integer kind;
+    private List<String> fenci;
 
 
     private List<NetPictureKeyword> netPictureKeywords;
@@ -52,6 +53,12 @@ public class NetKeyword implements Serializable {
     }
     public void setMaintain(Integer maintain) {
         this.maintain = maintain;
+    }
+    public void setFenci(List<String> fenci) {
+        this.fenci = fenci;
+    }
+    public List<String> getFenci() {
+        return fenci;
     }
     public Integer getIsCore() {
         return isCore;
