@@ -32,6 +32,8 @@ import com.melink.sop.api.models.open.modelinfos.NetKeywordRelationInfo;
 import com.melink.sop.api.models.open.modelinfos.OpenEmoticion;
 import com.melink.sop.api.models.open.modelinfos.PicturePromotionInfo;
 import org.apache.commons.lang.BooleanUtils;
+import org.apdplat.word.WordSegmenter;
+import org.apdplat.word.segmentation.Word;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
+import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -111,8 +114,8 @@ public class OpenEmoticionServiceImpl implements OpenEmoticionService {
         if (sensitiveWordUtil.isContains(vo.getQ(), appId)) {
             return returnEmpty();
         }
-
-        //旺旺白名单
+//
+//        //旺旺白名单
         if (isTaobaoWhitelist(vo.getQ(), appId)) {
             return returnEmpty();
         }
@@ -396,6 +399,95 @@ public class OpenEmoticionServiceImpl implements OpenEmoticionService {
         String s = jsonSerializer.toJson(result_);
 
         return s;
+    }
+
+    @Override
+    public String fenci(String keyword) {
+
+            List<String> words=new ArrayList<>();
+            List<String> segments = WordUtils.segment(keyword);
+            if (segments.size() > 5) {
+                words.addAll(new ArrayList<String>(segments.subList(0, 5)));
+            } else {
+                words.addAll(segments);
+            }
+//            this.get_feci();
+
+
+        return words.toString();
+    }
+
+    public void get_feci()  {
+        String base_input = "/Users/songshijun/data/code/project/microservice_java_fenci/microservice-openapi/";
+        String input = base_input+ "gif_textinfo.txt";
+        File file = new File(input);
+        if(file.isFile() && file.exists()) {
+            try {
+//                读文件
+                InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(file), "utf-8");
+                BufferedReader bufferReader = new BufferedReader(inputStreamReader);
+                String lineStr = null;
+//                写文件
+                OutputStreamWriter outputwriter = new OutputStreamWriter(new FileOutputStream(base_input+"gif_textinfo_fenci_result_de_new_dict.txt",true), "UTF-8");
+                BufferedWriter bw = new BufferedWriter(outputwriter);
+                try {
+                    Integer count = 0;
+                    while((lineStr = bufferReader.readLine()) != null) {
+                        System.out.println(lineStr);
+                        count += 1;
+                        System.out.println(count);
+                        String[] split_list = lineStr.split("-song-");
+                        String sentence = split_list[1];
+                        String guid = split_list[0];
+
+                        try {
+                                List<String> words = WordUtils.segment(sentence);
+                                System.out.println(words);
+
+
+                                if (words.size() >= 2) {
+                                    String tem_str = new String();
+                                    for (String i : words) {
+                                        String short_str = new String();
+                                        short_str = i + "/";
+
+                                        tem_str += short_str;
+                                    }
+                                    tem_str += "-song-" + sentence + "-song-"+guid;
+                                System.out.println(tem_str);
+                                    bw.write(tem_str + '\n');
+
+                                } else {
+                                    bw.write(lineStr + '\n');
+                                }
+                        }catch(Exception e){
+                            System.out.println("分词错误。。"+lineStr);
+                        }
+
+
+
+                    }
+                    bufferReader.close();
+                    inputStreamReader.close();
+                    bw.close();
+                    outputwriter.close();
+                    System.out.println("全部执行完毕。。。。。");
+                } catch (IOException e) {
+                    System.out.println("file read error!");
+                    e.printStackTrace();
+                }
+            } catch (UnsupportedEncodingException e) {
+                System.out.println("file catch unsupported encoding!");
+                e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                System.out.println("file not found!");
+                e.printStackTrace();
+            }
+        }else {
+            System.out.println("file is not a file or file is not existing!");
+        }
+
+
     }
 
 
@@ -920,7 +1012,14 @@ public class OpenEmoticionServiceImpl implements OpenEmoticionService {
         }
         for(OpenEmoticion e : openEmoticions){
             e.setFenciWords(words);
+            e.setRelationWords(allKeyword);
         }
+//        Collections.sort(openEmoticions,new Comparator<OpenEmoticion>() {
+//                    public int compare(OpenEmoticion arg0, OpenEmoticion arg1) {
+//                        return arg1.getWeight()-arg0.getWeight();
+//                    }
+//                }
+//        );
         return openEmoticions;
     }
 

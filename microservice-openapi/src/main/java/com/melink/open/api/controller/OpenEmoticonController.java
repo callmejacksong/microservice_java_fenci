@@ -70,6 +70,16 @@ public class OpenEmoticonController extends AbstractListController<OpenEmoticion
         return resultStr;
     }
 
+    @RequestMapping(value = "/gifs/fenci_result", produces = {"application/json;charset=UTF-8"})
+    public String fencikeyword(//@RequestParam("timestamp") final String timestamp,
+//                                 @RequestParam("signature") final String signature,
+                             @RequestParam("keyword") final String keyword,
+                             HttpServletRequest request) throws IOException {
+
+        String resultStr = openEmoticionService.fenci(keyword);
+        return resultStr;
+    }
+
     @RequestMapping(value = "/gifs/search_fenci", produces = {"application/json;charset=UTF-8"})
     @NewRequiredAuth
     public String newSearchEmoji_2(//@RequestParam("timestamp") final String timestamp,

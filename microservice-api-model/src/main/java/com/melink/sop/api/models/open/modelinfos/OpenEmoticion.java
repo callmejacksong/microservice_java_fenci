@@ -47,8 +47,10 @@ import java.util.List;
 	private String webpmd5;
 	@JsonIgnore
 	private List<String> keywords;
-	@JsonIgnore
+//	@JsonIgnore
 	private List<String> allKeywords;
+	//	@JsonIgnore
+	private List<String> relationWords;
 
 	private int classify;
 	@JsonIgnore
@@ -307,9 +309,15 @@ import java.util.List;
 	public List<String> getAllKeywords() {
 		return allKeywords;
 	}
+	public List<String> getRelationWords() {
+		return relationWords;
+	}
 
 	public void setAllKeywords(List<String> allKeywords) {
 		this.allKeywords = allKeywords;
+	}
+	public void setRelationWords(List<String> relationWords) {
+		this.relationWords = relationWords;
 	}
 
 	public EmoticionPromotion getPromotion() {
