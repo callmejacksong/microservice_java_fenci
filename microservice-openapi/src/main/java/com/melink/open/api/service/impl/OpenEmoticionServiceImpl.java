@@ -111,9 +111,9 @@ public class OpenEmoticionServiceImpl implements OpenEmoticionService {
             return returnEmpty();
         }
         //判断搜索词是否在敏感词中
-        if (sensitiveWordUtil.isContains(vo.getQ(), appId)) {
-            return returnEmpty();
-        }
+//        if (sensitiveWordUtil.isContains(vo.getQ(), appId)) {
+//            return returnEmpty();
+//        }
 //
 //        //旺旺白名单
         if (isTaobaoWhitelist(vo.getQ(), appId)) {
