@@ -24,34 +24,34 @@ syh:
       username: bqss
       password: Melink1212
 #测试库
-#  redis:
-#    config:
-#      host: 'r-bp1c83b23766a284.redis.rds.aliyuncs.com'
-#      port: 6379
-#      timeout: 5000
-#      password: 'Melink1212'
-#  result:
-#    redis:
-#      config:
-#        host: 'r-bp1c83b23766a284.redis.rds.aliyuncs.com'
-#        port: 6379
-#        timeout: 5000
-#        password: 'Melink1212'
-
-#正式库
   redis:
     config:
-      host: 'r-bp15e8a4520e2454.redis.rds.aliyuncs.com'
+      host: 'r-bp1c83b23766a284.redis.rds.aliyuncs.com'
       port: 6379
-      timeout: 500
+      timeout: 5000
       password: 'Melink1212'
   result:
     redis:
       config:
-        host: 'r-bp1919b447c5d664.redis.rds.aliyuncs.com'
+        host: 'r-bp1c83b23766a284.redis.rds.aliyuncs.com'
         port: 6379
-        timeout: 500
+        timeout: 5000
         password: 'Melink1212'
+
+#正式库
+#  redis:
+#    config:
+#      host: 'r-bp15e8a4520e2454.redis.rds.aliyuncs.com'
+#      port: 6379
+#      timeout: 500
+#      password: 'Melink1212'
+#  result:
+#    redis:
+#      config:
+#        host: 'r-bp1919b447c5d664.redis.rds.aliyuncs.com'
+#        port: 6379
+#        timeout: 500
+#        password: 'Melink1212'
 logging:
     level:
       com.melink.open.api.mapper: debug
