@@ -25,7 +25,7 @@
         <jedis.version>2.9.0</jedis.version>
         <collection.version>3.2.2</collection.version>
         <commonlang.version>3.4</commonlang.version>
-        <jackson.version>2.9.5</jackson.version>
+        <jackson.version>2.9.10.8</jackson.version>
     </properties>
 
 
